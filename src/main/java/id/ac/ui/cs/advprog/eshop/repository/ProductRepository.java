@@ -18,4 +18,33 @@ public class ProductRepository {
         return productData.iterator();
     }
 
+    public Product findById(int id){
+        Product product = null;
+        for(Product p : productData){
+            if(p.getProductId() == id){
+                product = p;
+                break;
+            }
+        }
+        return product;
+    }
+    public Boolean deleteProduct(int id){
+        for(Product p : productData){
+            if(p.getProductId() == id){
+                productData.remove(p);
+                return true;
+            }
+        }
+        return false;
+    }
+    public Product updateProduct(int id, Product productDetails){
+        Product product = this.findById(id);
+        if(product == null){
+            return null;
+        }
+        product.setProductName(productDetails.getProductName());
+        product.setProductQuantity(productDetails.getProductQuantity());
+        return product;
+    }
+
 }
