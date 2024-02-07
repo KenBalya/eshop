@@ -41,7 +41,6 @@ public class ProductController {
         if (existingProduct != null) {
             service.updateProduct(id, product);
         }
-        // handle the case where the product does not exist
         return "redirect:/product/list";
     }
     @GetMapping("/update/{id}")

@@ -11,6 +11,10 @@ public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
 
     public Product create(Product product){
+        if(product.getProductName().equals("") || product.getProductName() == null){
+            product.setProductName("Nameless Product");
+        }
+
         productData.add(product);
         return product;
     }
@@ -40,6 +44,9 @@ public class ProductRepository {
         Product product = this.findById(id);
         if(product == null){
             return null;
+        }
+        if(productDetails.getProductName().equals("") || productDetails.getProductName() == null){
+            productDetails.setProductName("Nameless Product");
         }
         product.setProductName(productDetails.getProductName());
         product.setProductQuantity(productDetails.getProductQuantity());
