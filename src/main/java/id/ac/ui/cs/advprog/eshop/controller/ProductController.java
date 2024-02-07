@@ -57,17 +57,4 @@ public class ProductController {
         }
     }
 
-
-    @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable int id, Model model) {
-        service.deleteProduct(id);
-        return "redirect:/product/list";
-    }
-
-
-    @GetMapping("/error")
-    public String errorPage(String message, Model model){
-        model.addAttribute("message", message);
-        return "errorPage";
-    }
 }

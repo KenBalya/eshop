@@ -28,15 +28,6 @@ public class ProductRepository {
         }
         return product;
     }
-    public Boolean deleteProduct(int id){
-        for(Product p : productData){
-            if(p.getProductId() == id){
-                productData.remove(p);
-                return true;
-            }
-        }
-        return false;
-    }
     public Product updateProduct(int id, Product productDetails){
         Product product = this.findById(id);
         if(product == null){
