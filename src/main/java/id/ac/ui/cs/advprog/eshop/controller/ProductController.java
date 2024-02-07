@@ -35,39 +35,10 @@ public class ProductController {
         return "productList";
     }
 
-    @PostMapping("/update/{id}")
-    public String updateProduct(@PathVariable int id, @ModelAttribute Product product, Model model) {
-        Product existingProduct = service.findById(id);
-        if (existingProduct != null) {
-            service.updateProduct(id, product);
-        }
-        // handle the case where the product does not exist
-        return "redirect:/product/list";
-    }
-    @GetMapping("/update/{id}")
-    public String showUpdateForm(@PathVariable("id") int id, Model model, RedirectAttributes redirectAttributes) {
-        Product product = service.findById(id);
-        if (product != null) {
-            model.addAttribute("product", product);
-            return "updateProduct";
-        } else {
-            // Product not found, redirect to error page with a message
-            redirectAttributes.addAttribute("message", "Product not found for ID: " + id);
-            return "redirect:/error";
-        }
-    }
-
-
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable int id, Model model) {
         service.deleteProduct(id);
         return "redirect:/product/list";
     }
 
-
-    @GetMapping("/error")
-    public String errorPage(String message, Model model){
-        model.addAttribute("message", message);
-        return "errorPage";
-    }
 }
