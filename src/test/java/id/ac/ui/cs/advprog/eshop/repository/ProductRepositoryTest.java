@@ -67,10 +67,17 @@ class ProductRepositoryTest {
     }
     @Test
     void updateTest(){
+        Product product1 = new Product();
+        product1.setProductId(0);
+        product1.setProductName("Sampo Cap Bambang");
+        product1.setProductQuantity(100);
+        productRepository.create(product1);
+
         Product updatedProduct = new Product();
         updatedProduct.setProductId(0);
         updatedProduct.setProductName("Sampo Cap Asep");
         updatedProduct.setProductQuantity(100);
+
 
         Iterator<Product> productIterator = productRepository.findAll();
         assertTrue(productIterator.hasNext());
