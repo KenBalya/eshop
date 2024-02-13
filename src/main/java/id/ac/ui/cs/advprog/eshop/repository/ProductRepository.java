@@ -9,12 +9,13 @@ import java.util.List;
 @Repository
 public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
+    private static int nextId = 0;
 
     public Product create(Product product){
         if(product.getProductName().equals("") || product.getProductName() == null){
             product.setProductName("Nameless Product");
         }
-
+        product.setProductId(nextId++);
         productData.add(product);
         return product;
     }
@@ -33,20 +34,18 @@ public class ProductRepository {
         return product;
     }
     public Boolean deleteProduct(int id){
-        Product product = this.findById(id);
-        if(product == null){
-            return false;
+        for(Product p : productData){
+            if(p.getProductId() == id){
+                productData.remove(p);
+                return true;
+            }
         }
-        productData.remove(product);
-        return true;
+        return false;
     }
     public Product updateProduct(int id, Product productDetails){
         Product product = this.findById(id);
         if(product == null){
             return null;
-        }
-        if(productDetails.getProductName().equals("") || productDetails.getProductName() == null){
-            productDetails.setProductName("Nameless Product");
         }
         product.setProductName(productDetails.getProductName());
         product.setProductQuantity(productDetails.getProductQuantity());
