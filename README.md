@@ -18,5 +18,6 @@ Reflection 2:
 
         name: Grant execute permission to Gradlew
         run: chmod +x ./gradlew
+2. In summary, it seems like my CI process is largely effective, especially with successful integrations and no issues in ci.yml. However, the issues in sonar.yml should be addressed to maintain high code quality, which is a crucial aspect of CI. For the CD part, the process remains effective due to the deployment to production is automatic and happens right after successful CI builds.
    
    
