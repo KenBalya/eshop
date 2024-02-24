@@ -20,4 +20,14 @@ Reflection 2:
         run: chmod +x ./gradlew
 2. In summary, it seems like my CI process is largely effective, especially with successful integrations and no issues in ci.yml. However, the issues in sonar.yml should be addressed to maintain high code quality, which is a crucial aspect of CI. For the CD part, the process remains effective due to the deployment to production is automatic and happens right after successful CI builds.
    
-   
+Reflection 3:
+
+1. Principles I applied to my project:
+   - Single Responsibility Principle: All classes that I made have a single responsibility, for instance, ProductController seems to have a single responsibility, it handles HTTP requests related to Product entities. Furthermore, I broke the inheritance relationship between ProductController and CarController since they didn't have any overlapping usage and are 2 different entities used for different purposes.
+   - Liskov Substitution Principle (LSP): In the source code given in the tutorial, extending CarController to ProductController seems a little bias because they deal with different endpoints and potentially different business logic, this could lead to incorrect assumptions in the codebase about the interchangeability of these controllers. Due to tha, I removed the inheritance because CarController is not suitable for ProductController
+   - Open/Closed Principle: I made all existing services private in the controller, but I didn't implement base controller.
+   - ISP: I broke the services interface into several part which builds up CRUD, that is CreateService, ReadService, UpdateService, and DeleteService. Furthermore, I used generics so all this services could be accessed at once without having to implement seperate interfaces for Car and Product.
+   - DIP: The source code given in the tutorial had already implemented this principle since all services are accessable from the high-level layer by an interface to access the lower parts. For instance, when we are adding a product in the controller, we accessed the product repository via services which are interfaces rather than accessing it directly to the class.
+
+2. The main advantage that I felt is that the codes that I wrote after applying SOLID are generally shorter. Moreover, debugging seems easier since the services had been broken down, so if I found errors in a method, I could easily trace the source of it.
+3. The disadvandates of not using SOLID prnciple might be a harder time in debugging the code. Notice that tasks in this tutorial are mostly similar to the ones in the tutorial 1. However, it took me over an hour to debug errors in tutorial 1. In this tutorial, it only took me less than 10 minutes due to the simplicity of code that this principle gave me.
