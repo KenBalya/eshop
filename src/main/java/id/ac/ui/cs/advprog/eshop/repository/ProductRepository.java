@@ -6,51 +6,48 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
+
 @Repository
 public class ProductRepository {
+
     private List<Product> productData = new ArrayList<>();
 
-    public Product create(Product product){
-        if(product.getProductName().equals("") || product.getProductName() == null){
-            product.setProductName("Nameless Product");
+    public Product create(Product product) {
+        if (product.getProductId() == null) {
+            UUID uuid = UUID.randomUUID();
+            product.setProductId(uuid.toString());
         }
-
         productData.add(product);
         return product;
     }
-    public Iterator<Product> findAll(){
+
+    public Iterator<Product> findAll() {
         return productData.iterator();
     }
 
-    public Product findById(int id){
-        Product product = null;
-        for(Product p : productData){
-            if(p.getProductId() == id){
-                product = p;
-                break;
+    public Product findById(String id) {
+        for (Product product : productData) {
+            if (product.getProductId().equals(id)) {
+                return product;
             }
         }
-        return product;
-    }
-    public Boolean deleteProduct(int id){
-        Product product = this.findById(id);
-        if(product == null){
-            return false;
-        }
-        productData.remove(product);
-        return true;
-    }
-    public Product updateProduct(int id, Product productDetails){
-        Product product = this.findById(id);
-        if(product == null){
-            return null;
-        }
-        if(productDetails.getProductName().equals("") || productDetails.getProductName() == null){
-            productDetails.setProductName("Nameless Product");
-        }
-        product.setProductName(productDetails.getProductName());
-        product.setProductQuantity(productDetails.getProductQuantity());
-        return product;
+        return null;
     }
 
+    public Product update(String id, Product updatedProduct) {
+        for (int i = 0; i < productData.size(); i++) {
+            Product product = productData.get(i);
+            if (product.getProductId().equals(id)) {
+                product.setProductName(updatedProduct.getProductName());
+                product.setProductQuantity(updatedProduct.getProductQuantity());
+                return product;
+            }
+        }
+        return null;
+    }
+
+    public void delete(String id) {
+        productData.removeIf(product -> product.getProductId().equals(id));
+    }
 }
