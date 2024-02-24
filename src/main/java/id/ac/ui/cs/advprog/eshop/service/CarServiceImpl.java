@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 @Service
-public class CarServiceImpl implements  CarService{
+public class CarServiceImpl implements  CreateService<Car>, ReadService<Car>, UpdateService<Car>, DeleteService<Car>{
     @Autowired
     private CarRepository carRepository;
     @Override
@@ -36,7 +36,7 @@ public class CarServiceImpl implements  CarService{
         carRepository.update(carId, car);
     }
     @Override
-    public void deleteCarById(String carId){
+    public void deleteById(String carId){
         carRepository.delete(carId);
     }
 
