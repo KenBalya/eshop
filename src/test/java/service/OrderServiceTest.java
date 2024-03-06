@@ -1,7 +1,10 @@
 package service;
 
+import enums.OrderStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Product;
+import id.ac.ui.cs.advprog.eshop.repository.OrderRepository;
+import id.ac.ui.cs.advprog.eshop.service.OrderServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -108,14 +111,7 @@ public class OrderServiceTest {
         Order result = orderService.findById(order.getId());
         assertEquals(order.getId(), result.getId());
     }
-    @Test
-    void testFindByIdIfIdFound() {
-        Order order = orders.get(1);
-        doReturn(order).when(orderRepository).findById(order.getId());
 
-        Order result = orderService.findById(order.getId());
-        assertEquals(order.getId(), result.getId());
-    }
     @Test
     void testFindByIdIfIdNotFound() {
         doReturn(null).when(orderRepository).findById("zczc");
