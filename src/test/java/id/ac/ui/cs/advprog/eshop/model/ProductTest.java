@@ -10,7 +10,7 @@ public class ProductTest {
     @BeforeEach
     void setUp(){
         this.product = new Product();
-        this.product.setProductId(0);
+        this.product.setProductId("13652556-012a-4c07-b546-54eb1396d79b");
         this.product.setProductName("Sampo Cap Bambang");
         this.product.setProductQuantity(100);
     }
